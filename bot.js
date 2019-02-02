@@ -10,7 +10,7 @@ client.on('ready',  () => {
 client.user.setStatus("dnd");
 });
   client.on('ready', () => {                           
-client.user.setGame(`Shelp | Lamyem Server`,'https://www.twitch.tv/tarikrs');                                                                                                                                                                                                                                                                                                                                                                                                                             
+client.user.setGame(`*help | Lamyem Server`,'https://www.twitch.tv/tarikrs');                                                                                                                                                                                                                                                                                                                                                                                                                             
 });          
 // playing
 
@@ -51,9 +51,6 @@ client.on("message", message => {
 ❖unmute : لحذف الميوت من الشخص
 ❖kick : لطرد عضو من السيرفير
 ❖ban : لعمل بان لاحد من في السيرفير
-[<@516473846983950336>]صانع البوت >
-
-
 `);
 
     message.author.sendEmbed(embed)
@@ -62,7 +59,7 @@ client.on("message", message => {
     }
 });
 client.on('message', message => {
-     if (message.content === ("Shelp")) {
+     if (message.content === ("*help")) {
      let embed = new Discord.RichEmbed()
   .setAuthor(message.author.username)
   .setColor("#8650a7")
@@ -75,7 +72,7 @@ client.on('message', message => {
 
 
 
-const perfix = 'S';
+const perfix = '*';
 client.on('message', msg => {
  if (msg.content.startsWith('*' + 'send')) {
       let args = msg.content.split(' ').slice(1)
@@ -91,20 +88,6 @@ client.on('message', msg => {
     }
 });
 
-
-var antispam = require("anti-spam"); //npm i anti-spam
- 
-antispam(client, {
-  warnBuffer: 3, //الحد الأقصى المسموح به من الرسائل لإرسالها في الفاصل الزمني قبل الحصول على تحذير.
-  maxBuffer: 5, // الحد الأقصى المسموح به من الرسائل لإرسالها في الفاصل الزمني قبل الحصول على ميوت.
-  interval: 1000, // مقدار الوقت قبل حصول باند
-  warningMessage: "stop spamming.", // رسالة تحذير اذا سوا سبام!
-  roleMessage: "Muted!!", // الرسالة الي تجي اذا شخص اخذ ميوت
-  roleName: "Muted", // اسم رتبة الميوت
-  maxDuplicatesWarning: 7, // عدد الرسايل الي قبل التحذيرات
-  maxDuplicatesBan: 10, // عدد الرسايل الي يقدر المستخدم يرسلها قبل الميوت
-  time: 100000000000, // عدد الوقت الي يجلس لين تسحب رتبة الميوت من الشخص الحسبة برمجية وليست كتابية
-});
 
 
 var guilds = {};
@@ -982,7 +965,7 @@ client.on("message", message => {
         if(!message.channel.guild) return;
                 if(message.author.bot) return;
         let channel = message.guild.channels.find("name", "التقديمات")
-            if(!channel) return message.reply("**لانشاء روم التقديمات !!setsubmissions من فضلك اكتب الامر**")
+            if(!channel) return message.reply("**لانشاء روم التقديمات *setsubmissions من فضلك اكتب الامر**")
             if(channel) {
             message.channel.send( message.member + ', **:timer:**').then( (m) =>{
               m.edit( message.member + ', **اسمك الحقيقى بالكامل **' )
@@ -1055,7 +1038,7 @@ client.on("message", message => {
 }
         });
         client.on('message', message=>{
-            if(message.content.startsWith("*روم1")) {
+            if(message.content.startsWith("*setsubmissions")) {
             if(!message.channel.guild) return;
                 if(message.author.bot) return;
                 if(!message.member.hasPermission('ADMINISTRATOR')) return message.reply("**تحتاج الى `MANAGE_CHANNELS`**");
@@ -1174,29 +1157,28 @@ client.on('message', msg => {
 }
 });
 
-client.on('message', msg => {
-    if (msg.author.bot) return;
-    if (!msg.content.startsWith("*")) return;
-    let command = msg.content.split(" ")[0];
-    command = command.slice("*".length);
-    let args = msg.content.split(" ").slice(1);
-   
-      if(command === "clear") {
-          const emoji = client.emojis.find("name", "wastebasket")
-      let textxt = args.slice(0).join("");
-      if(msg.member.hasPermission("MANAGE_MESSAGES")) {
-      if (textxt == "") {
-          msg.delete().then
-      msg.channel.send("***```ضع عدد الرسائل التي تريد مسحها 👌```***").then(m => m.delete(3000));
-  } else {
-      msg.delete().then
-      msg.delete().then
-      msg.channel.bulkDelete(textxt);
-          msg.channel.send("```php\nعدد الرسائل التي تم مسحها: " + textxt + "\n```").then(m => m.delete(3000));
-          }    
-      }
-  }
-  });
+client.on("message", message => {
+ 
+            var args = message.content.substring("*".length).split(" ");
+            if (message.content.startsWith("*" + "clear")) {
+   if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('⚠ | **ليس لديك صلاحيات**');
+        var msg;
+        msg = parseInt();
+      
+      message.channel.fetchMessages({limit: msg}).then(messages => message.channel.bulkDelete(messages)).catch(console.error);
+      message.channel.sendMessage("", {embed: {
+        title: "Done | تــم",
+        color: 0x06DF00,
+        description: "تم مسح الرسائل بنجاح",
+        footer: {
+          text: "F5AmEh.bot" // غير هنا حط اسم البوت
+        }
+      }}).then(msg => {msg.delete(3000)});
+                          }
+
+     
+});
+
 
 
 
@@ -1590,14 +1572,6 @@ m.sendMessage(args)
 
 
 
-client.on("ready", () => {
-  function lol() {
-    client.guilds.get('536893193002811393').roles.find("name", "Rainbow").setColor("RANDOM");
-  }
-  setInterval(lol, 6000);
-})
-
-
 
 
 
@@ -1752,4 +1726,4 @@ client.on('message', message => {
 
 
 
-client.login(process.env.BOT_TOKEN);
+client.login("NTQxMDY2MjgzMTE5MDE3OTk0.DzaC2w.eJgxFKmEtfYFvvUFHyaTin0SBrQ");
