@@ -49,3 +49,7 @@ Test
       message.channel.send("تفقد الخاص")
   }
 });
+
+
+
+client.login(process.env.BOT_TOKEN);
